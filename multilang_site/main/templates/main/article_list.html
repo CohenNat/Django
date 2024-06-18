@@ -1,19 +1,24 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <title>Blog Articles</title>
+    <title>{% trans "Blog Articles" %}</title>
 </head>
 <body>
-    <h1>Blog Articles</h1>
+    <h1>{% trans "Blog Articles" %}</h1>
     <ul>
         {% for article in articles %}
             <li>
                 <h2>{{ article.title }}</h2>
                 <p>{{ article.content }}</p>
-                <p><em>{{ article.publication_date }}</em></p>
+                <p>{{ article.publication_date }}</p>
             </li>
         {% endfor %}
     </ul>
+    <p>
+        <a href="{% url 'set_language' %}?next={{ request.path }}&language=fr">{% trans "Français" %}</a>
+        <a href="{% url 'set_language' %}?next={{ request.path }}&language=en">{% trans "English" %}</a>
+    </p>
 </body>
 </html>
