@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% load i18n %}{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+
+    <!-- Formulaire de sélection de langue -->
+    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <button type="submit" name="language" value="en">English</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <button type="submit" name="language" value="fr">Français</button>
+    </form>
+
+    <p>{{ article.content }}</p>
+    <small>{% trans "Publié le :" %} {{ article.publication_date }}</small>
+
+    <p><a href="{% url 'article_list' %}">{% trans "Retour à la liste" %}</a></p>
+</body>
+</html>

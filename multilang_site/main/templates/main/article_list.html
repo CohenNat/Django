@@ -22,8 +22,8 @@
     <ul>
         {% for article in articles %}
             <li>
-                <h2>{{ article.title }}</h2>
-                <p>{{ article.content }}</p>
+                <h2><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></h2>
+                <p>{{ article.content|truncatewords:30 }}</p>
                 <small>{% trans "Publié le :" %} {{ article.publication_date }}</small>
             </li>
         {% endfor %}
