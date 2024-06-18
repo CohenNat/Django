@@ -1,24 +1,32 @@
-{% load i18n %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% trans "Blog Articles" %}</title>
+    <title>{% load i18n %}{% trans "Liste des articles" %}</title>
 </head>
 <body>
-    <h1>{% trans "Blog Articles" %}</h1>
+    <h1>{% trans "Liste des articles" %}</h1>
+
+    <!-- Formulaire de sélection de langue -->
+    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="/en{{ request.path_info|slice:'3:' }}">
+        <button type="submit" name="language" value="en">English</button>
+    </form>
+    <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="/fr{{ request.path_info|slice:'3:' }}">
+        <button type="submit" name="language" value="fr">Français</button>
+    </form>
+
     <ul>
         {% for article in articles %}
             <li>
                 <h2>{{ article.title }}</h2>
                 <p>{{ article.content }}</p>
-                <p>{{ article.publication_date }}</p>
+                <small>{% trans "Publié le :" %} {{ article.publication_date }}</small>
             </li>
         {% endfor %}
     </ul>
-    <p>
-        <a href="{% url 'set_language' %}?next={{ request.path }}&language=fr">{% trans "Français" %}</a>
-        <a href="{% url 'set_language' %}?next={{ request.path }}&language=en">{% trans "English" %}</a>
-    </p>
 </body>
 </html>

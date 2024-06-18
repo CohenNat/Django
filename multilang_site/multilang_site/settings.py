@@ -10,9 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import os
 from pathlib import Path
-from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hb+8p)lpnn5e4551+n+afadhx)p2+ncxynyc^t-5=%@_)1kh$s'
+SECRET_KEY = 'django-insecure-+&db+#7t9o%mo#%oj7k=uw)j8r7+^2(dxlc2z6%-987mp)!l76'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,11 +44,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'multilang_site.urls'
@@ -65,7 +63,6 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.i18n',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -108,20 +105,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
+LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
 
-LANGUAGE_CODE = 'en'
 USE_I18N = True
+
 USE_L10N = True
+
 USE_TZ = True
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-]
-
-LANGUAGES = [
-    ('en', _('English')),
-    ('fr', _('French')),
+    BASE_DIR / 'locale',
 ]
 
 # Static files (CSS, JavaScript, Images)
