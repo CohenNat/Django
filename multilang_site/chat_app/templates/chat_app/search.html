@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche augmentée par IA</title>
+</head>
+<body>
+    <h1>Recherche augmentée par IA</h1>
+    <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="query" placeholder="Recherchez...">
+        <button type="submit">Rechercher</button>
+    </form>
+    {% if search_results %}
+        <ul>
+        {% for result in search_results %}
+            <li>{{ result }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+
+    <h2>Résultat augmenté par IA :</h2>
+    <p>{{ augmented_result }}</p>
+</body>
+</html>
